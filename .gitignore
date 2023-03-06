@@ -1,0 +1,9 @@
+#ignore all notes with .txt
+*.txt
+
+
+# ignore .env file
+.env
+
+# ignore vscode configuration directory
+/.vscode
