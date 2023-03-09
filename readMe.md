@@ -12,7 +12,7 @@
 - tailwindcss 
     -autoprefixer
     -postcss
-- google-auth-library
+- @react-oauth/google
 - uuid
 
 ## Tasklist
