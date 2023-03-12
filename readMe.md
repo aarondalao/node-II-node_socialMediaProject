@@ -14,18 +14,19 @@
     -postcss
 - @react-oauth/google
 - uuid
+- jwt-decode
 
 ## Tasklist
 - [x] backend setup
     - [x] initial setup of sanity.io
     - [x] schema declarations
 - [] frontend
-    - [] home
-    - [] login
+    - [] home (container)
+    - [x] login (component)
+    - [] Sidebar (component)
+    - [] UserProfile (component)
+    - [] Pins(container)
     
-
-
-
 ## File Structure
 ```
 node-II-node
@@ -62,11 +63,21 @@ node-II-node
 ┃   ┃       ┣ manifest.json
 ┃   ┃       ┗ robots.txt
 ┃   ┣   src/
+┃   ┃       ┣ assets/            
 ┃   ┃       ┣ components/
+┃   ┃           ┣ index.js
+┃   ┃           ┣ Login.jsx
+┃   ┃           ┣ Sidebar.jsx
+┃   ┃           ┗ UserProfile.jsx
 ┃   ┃       ┣ containers/
+┃   ┃           ┣ Home.jsx
+┃   ┃           ┗ Pins.jsx
+┃   ┃       ┣ utils
+┃   ┃           ┗ data.js
 ┃   ┃       ┣ App.js
 ┃   ┃       ┣ index.css
 ┃   ┃       ┣ index.html
+┃   ┃       ┣ client.js
 ┃   ┃       ┗ index.js
 ┃   ┣   .gitignore
 ┃   ┣   package-lock.json
