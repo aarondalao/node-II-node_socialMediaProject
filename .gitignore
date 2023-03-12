@@ -4,6 +4,7 @@
 
 # ignore .env file
 .env
+.env.example
 
 # ignore vscode configuration directory
 /.vscode

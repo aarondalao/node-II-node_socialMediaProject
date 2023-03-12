@@ -9,6 +9,12 @@ export default {
             title: "userName",
             type: "string"
         },
+        // email object
+        {
+            name: "email",
+            title: "Email",
+            type: "string"
+        },
         // image object
         {
             name: "image",
