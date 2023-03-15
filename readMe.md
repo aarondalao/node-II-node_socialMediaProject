@@ -23,7 +23,7 @@
 - [ ] frontend
     - [ ] home (container)
     - [x] login (component)
-    - [ ] Sidebar (component)
+    - [x] Sidebar (component)
     - [ ] UserProfile (component)
     - [ ] Pins(container)
     
