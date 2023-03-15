@@ -17,10 +17,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
     <Router>
-         {/* TODO: find a workaround to make .env variables work */}
-         {/* <----- does not work due to create-react-app restrictions */}
-         <GoogleOAuthProvider clientId ={ process.env.REACT_APP_GOOGLE_API_TOKEN }> 
-         {/* <GoogleOAuthProvider clientId="%REACT_APP_GOOGLE_API_TOKEN%"> */}
+         <GoogleOAuthProvider clientId ={ process.env.REACT_APP_GOOGLE_API_TOKEN }>          
             <App />
         </GoogleOAuthProvider>
     </Router>
