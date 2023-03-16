@@ -62,6 +62,7 @@ const Sidebar = ({ user, closeToggle }) => {
         </div>
       </div>
 
+      {/* && refers to conditional rendering. this emulates if statements as this creates distinct components that depends of the state of your logic/application */}
       { user && (
         <Link
         to={ `user-profile/${user._id}` }

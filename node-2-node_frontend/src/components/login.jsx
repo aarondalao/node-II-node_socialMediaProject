@@ -92,12 +92,6 @@ const Login = () => {
           </div>
 
           <div className='shadow-2xl'>
-
-            {/* using custom markup for google login does work but it seems cant use credentialResponse to pull out necessary data. */}
-            {/* <button className='flex justify-center items-center shadow-lg px-5 py-2 bg-mainColor rounded-md' onClick={() => handleLogin()} >
-              <FcGoogle className='mr-3' />Sign in with Google
-            </button> */}
-
             <GoogleLogin onSuccess={(credentialResponse) => handleLogin(credentialResponse)} onError={(error) => handleLoginErrors(error)} />
           </div>
         </div>
