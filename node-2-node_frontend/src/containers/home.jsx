@@ -1,3 +1,9 @@
+/*
+  notes:
+
+
+*/ 
+
 import React, { useState, useRef, useEffect } from 'react';
 import { HiMenu } from 'react-icons/hi';
 import { AiFillCloseCircle } from 'react-icons/ai';
@@ -17,11 +23,13 @@ const Home = () => {
 
   const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
 
+  // set up scroll to be at the top of the sidebar
   useEffect(() => {
     scrollRef.current.scrollTo(0, 0)
   }, [])
 
 
+  // retrieve data using a query from data.js
   useEffect(() => {
     // sub is the google id
     const query = userQuery(userInfo?.sub)
@@ -38,19 +46,16 @@ const Home = () => {
 
       {/* desktop sidebar */}
       <div className='hidden md:flex h-screen flex-initial'>
-        
         <Sidebar user={user && user} />
       </div>
 
       {/* mobile sidebar */}
       <div className='flex md:hidden flex-row'>
-
         <div className='p-2 w-full flex flex-row justify-between items-center shadow-md'>
           <HiMenu fontSize={40} className="cursor-pointer" onClick={() => setToggleSideBar(true)} />
           <Link to='/'>
             <img src={myLogo} alt="logo" className='w-16' />
           </Link>
-
           <Link to={`user-profile/ ${user?._id}`}>
             <img src={user?.image} alt="logo" className='w-16' />
           </Link>

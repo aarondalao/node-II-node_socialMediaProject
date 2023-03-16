@@ -1,5 +1,6 @@
 /*
     notes:
+    gather the keys for the project id and tokein in the sanity manager using
 
     resources:
     https://www.sanity.io/docs/js-client
@@ -12,13 +13,10 @@ import imageUrlBuilder from '@sanity/image-url';
 
 
 export const client = createClient({
-    // TODO: find a workaround to make .env variables work
-    // gather this from sanity manager, overview tab
     projectId: process.env.REACT_APP_SANITY_PROJECT_ID, 
     dataset: 'production',
     apiVersion: '2023-03-11',
     useCdn: true,
-    // gather this from sanity manager, API tab
     token: process.env.REACT_APP_SANITY_EDITOR_TOKEN
 });
 
