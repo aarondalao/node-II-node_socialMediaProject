@@ -1,6 +1,6 @@
 /*
     Notes:
-    date created: 16/03/2023
+    date created: 16/03/2023    
 */
 
 import React, { useState, useEffect } from 'react';
@@ -11,48 +11,49 @@ import { feedQuery, searchQuery } from '../utils/data';
 import MasonryLayout from './MasonryLayout';
 import Spinner from './Spinner'
 
-const Feed = () =>{
-    const [pins, setPins] = useState();
+const Feed = () => {
+    const [pins, setPins] = useState(null);
     const [loading, setLoading] = useState(false);
     const { categoryId } = useParams();
 
     useEffect(() => {
-      if(categoryId) {
-        setLoading(true);
+        if (categoryId) {
+            setLoading(true);
 
-        const query = searchQuery(categoryId);
+            const query = searchQuery(categoryId);
 
-        client.fetch(query).then((data) => {
-            setPins(data);
-            setLoading(false);
-        });
-      }
-      else {
-        setLoading(true);
+            client.fetch(query).then((data) => {
+                setPins(data);
+                
 
-        client.fetch(feedQuery).then((data) => {
-            setPins(data);
-            setLoading(false);
-        });
-      }
+                setLoading(false);
+            });
+        }
+        else {
+            setLoading(true);
+
+            client.fetch(feedQuery).then((data) => {
+                setPins(data);
+                setLoading(false);
+                
+            });
+        }
     }, [categoryId]);
 
     const ideaName = categoryId || 'new';
 
-    if(loading){
+    if (loading) {
         return (
             <Spinner message={`${ideaName} will be available in the foreseeable future. Stay tuned! `} />
         );
     }
-    
 
     return (
         <div>
             {
                 pins && (
-                    <MasonryLayout pins={ pins }/>
+                    <MasonryLayout pins={pins} />
                 )
-
             }
         </div>
     );

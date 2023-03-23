@@ -1,7 +1,11 @@
 /*
   notes:
+  
 
   find more ways to customize this
+
+  TODOS:
+    1) mobile sizing is way too big. adjust this
 */
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom';
