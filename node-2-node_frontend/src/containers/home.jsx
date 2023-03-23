@@ -9,11 +9,12 @@ import { HiMenu } from 'react-icons/hi';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { Link, Route, Routes } from 'react-router-dom';
 
-import { Sidebar, UserProfile } from '../components';
+// import { Sidebar, UserProfile } from '../components';
+import { Sidebar } from '../components';
 import Pins from './Pins';
 import { client } from '../client';
 import myLogo from '../assets/logoCropped.png';
-import { userQuery } from '../utils/data';
+import { userQuery, fetchUserFromLocalStorage } from '../utils/data';
 
 const Home = () => {
 
@@ -21,8 +22,9 @@ const Home = () => {
   const [user, setUser] = useState(null);
   const scrollRef = useRef(null);
 
-  const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
-
+  // const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
+  const userInfo = fetchUserFromLocalStorage();
+  
   // set up scroll to be at the top of the sidebar
   useEffect(() => {
     scrollRef.current.scrollTo(0, 0)
@@ -80,8 +82,8 @@ const Home = () => {
       {/* routes */}
       <div className='pb-2 flex-1 h-screen overflow-y-scroll' ref={scrollRef}>
         <Routes>
-          <Route path='/user-profile/:userId' element={<UserProfile />} />
-          <Route path='/' element={<Pins user={user && user} />} />
+          {/* <Route path='/user-profile/:userId' element={<UserProfile />} /> */}
+          <Route path='/*' element={<Pins user={user && user} />} />
         </Routes>
       </div>
 
