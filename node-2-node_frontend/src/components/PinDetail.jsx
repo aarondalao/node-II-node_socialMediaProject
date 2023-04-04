@@ -1,7 +1,12 @@
 /*
+    Date created: 21/03/2023
     Notes:
 
-    Date created: 21/03/2023
+    TODO:
+    1) comments must show in pin detail right after submitting it. note: comment is indeed working and backend is receiving incomming comment inserts
+    2) loading of similar pins is at the moment not working. similar tags should appear.
+    3) container for the  photos needs to be unifor despite having different photo sizes
+    4) zoom in functionality could be nice to have.
 */
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -23,6 +28,12 @@ const PinDetail = ({ user }) => {
 
 
     const fetchPinDetails = () => {
+        
+    } 
+
+    useEffect(() => {
+        // fetchPinDetails();   
+        
         const query = pinDetailQuery(pinId);
 
         if (query) {
@@ -42,10 +53,6 @@ const PinDetail = ({ user }) => {
                 }
             });
         }
-    };
-
-    useEffect(() => {
-        fetchPinDetails();
     }, [pinId]);
 
     const addComment = () => {
@@ -81,18 +88,7 @@ const PinDetail = ({ user }) => {
                 </div>
 
                 <div className="w-full p-5 flex-1 xl:min-w-620">
-                    <div className="flex items-center justify-between">
-                        <div className="flex gap-2 items-center">
-
-                            <a href={`${pinDetail.image.asset.url}?dl=`} download className="bg-secondaryColor p-2 text-xl rounded-full flex items-center justify-center text-dark opacituy-75 hover:opacity-100">
-                                <MdDownloadForOffline />
-
-                            </a>
-                        </div>
-                        <a href={pinDetail.destination} target='_blank' rel='noreferrer'>
-                            {pinDetail.destination.slice(8)}
-                        </a>
-                    </div>
+                    
                     <div>
                         <h1 className="text-4xl font-bold break-words mt-3">
                             {pinDetail.title}
@@ -101,11 +97,21 @@ const PinDetail = ({ user }) => {
                             {pinDetail.about}
                         </p>
                     </div>
+                    <div className="flex items-center justify-between my-5">
+                        <div className="flex gap-2 items-center">
+                            <a href={`${pinDetail.image.asset.url}?dl=`} download className="bg-secondaryColor p-2 text-xl rounded-full flex items-center justify-center text-dark opacituy-75 hover:opacity-100">
+                                <MdDownloadForOffline />
+                            </a>
+                        </div>
+                        <a href={pinDetail.destination} target='_blank' rel='noreferrer'>
+                            {pinDetail.destination.slice(8)}
+                        </a>
+                    </div>
 
                     <Link to={`/user-profile/${pinDetail?.postedBy._id}`} className="flex gap-2 mt-5 items-center bg-white rounded-lg">
                         <img src={pinDetail?.postedBy.image} alt="user-profile" className="w-10 h-10" />
                         <p className="font-bold">
-                            {pinDetail?.postedby.userName}
+                            {pinDetail?.postedBy?.userName}
                         </p>
                     </Link>
                     <h2 className='mt-5 text-2xl'>
@@ -113,7 +119,8 @@ const PinDetail = ({ user }) => {
                     </h2>
                     <div className='max-h-370 overflow-y-auto'>
                         {
-                            pinDetail?.comments?.map((item) => {
+                            pinDetail?.comments?.map((item) => 
+                                (
                                 <div className="flex gap-2 mt-5 items-center bg-white rounded-lg" key={ item.comment }>
                                     <img src={item.postedBy?.image} alt="user-profile" 
                                         className='w-10 h-10 rounded-full cursor-pointer'
@@ -128,12 +135,12 @@ const PinDetail = ({ user }) => {
                                         </p>
                                     </div>    
                                 </div>
-                            })
-                        }
+                            ))}
                     </div>
                     <div className="flex flex-wrap mt-6 gap-3">
-                        <Link to={ `user-profile/${user._id}` }>
-                            <img src={user.image} alt="user-profile" className="w-10 h-10 rounded-full cursor-pointer" />
+                    
+                        <Link to={ `user-profile/${user?._id}` }>
+                            <img src={user?.image} alt="user-profile" className="w-10 h-10 rounded-full cursor-pointer" />
                         </Link>
                         <input 
                         className=" flex-1 border-gray-100 outline-none border-2 p-2 rounded-2xl focus:border-gray-300"
@@ -148,7 +155,7 @@ const PinDetail = ({ user }) => {
                         <button type='button' 
                         className='bg-red-500 text-white rounded-full px-6 py-2 font-semibold text-base outline-none'
                         onClick={addComment}>
-                            { addingComment ? 'typing...' : 'Done!' }
+                            { addingComment ? 'Please wait...' : 'Post' }
                         </button>
                     </div>
                 </div>
@@ -163,9 +170,14 @@ const PinDetail = ({ user }) => {
         }
         {
             pins ? (
-                <MasonryLayout pins={pins} />
+                
+                <div className="mt-6">
+                <MasonryLayout className="mt-5" pins={pins} />
+                </div>
             ) : (
-                <Spinner message="Loading more pins. grab a coffee for now... "/>
+                <div className="mt-6">
+                <Spinner className="mt-5" message="Loading more pins. grab a coffee for now... "/>
+                </div>
             )
         }
         </>

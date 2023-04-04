@@ -37,12 +37,13 @@ const CreatPin = ({ user }) => {
             setLoading(true);
             client.assets.upload('image', selectedFile, { contentType: selectedFile.type, filename: selectedFile.name })
                 .then((document) => {
+                    alert("image uploaded")
                     setImageAsset(document);
                     setLoading(false);
-
                 })
                 .catch((error) => {
-                    console.log(`upload failed: ${error.message}`)
+                    // console.log(`upload failed: ${error.message}`)
+                    alert(`upload failed: ${error.message}`)
                 });
         }
         else {
@@ -158,8 +159,8 @@ const CreatPin = ({ user }) => {
                     <input className="outline-none text-2xl sm:text-3xl font-bold border-b-2 border-gray-200 p-2"
                         type="text" value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        placeholder="what's your pin called?" />
-
+                        placeholder="what's your pin called?"
+                        />
                     {user && (
                         <div className="flex gap-2 mt-2 mb-2 items-center bg-white rounded-lg" >
                             <img className="w-10 h-10 rounded-full" src={user.image} alt="user-profile" />
@@ -191,7 +192,7 @@ const CreatPin = ({ user }) => {
                                 <option value="others" className="sm:text-bg bg-white" >Select Category</option>
                                 {
                                     categories.map((item) => (
-                                        <option className="text-base border-0 outline-none capitalize bg-white text-black" value={item.name}> {item.name} </option>
+                                        <option className="text-base border-0 outline-none capitalize bg-white text-black" value={item.name} key={item.name}> {item.name} </option>
                                     ))
                                 }
                             </select>
