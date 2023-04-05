@@ -35,6 +35,8 @@ const UserProfile = () => {
   useEffect( () => {
     const query = userQuery(userId);
     client.fetch(query).then((data) => {
+      console.log("===============================================================");
+      console.log(data);
       setUser(data[0]);
     });
   }, [userId]);
@@ -77,7 +79,7 @@ const UserProfile = () => {
           <h1 className="font-bold text-3xl text-center mt-3">
             { user.userName }
           </h1>
-          <div className="absolute top-0 z-1 right-0 p-2">
+          <div className="absolute top-0 z-0 right-0 p-2">
             {userId === User.sub && (
               <googleLogout clientId={`${process.disconnect.REACT_APP_GOOGLE_API_TOKEN}`}
               render ={(renderProps) => {

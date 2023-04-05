@@ -118,9 +118,9 @@ export const categories = [
 ];
 
 export const pinDetailQuery = (pinId) => {
-    const query = `*[_type == "pin" && _id == '${pinId}'] {
+    const query = `*[_type == "pin" && _id == '${pinId}']{
         image {
-            asset -> {
+            asset->{
                 url
             }
         },
@@ -135,7 +135,7 @@ export const pinDetailQuery = (pinId) => {
             image
         },
         save[]{
-            postedBy-> {
+            postedBy->{
                 _id,
                 userName,
                 image
@@ -144,7 +144,7 @@ export const pinDetailQuery = (pinId) => {
         comments[]{
             comment,
             _key,
-            postedBy-> {
+            postedBy->{
                 _id,
                 userName,
                 image
@@ -207,7 +207,7 @@ export const userSavedPinsQuery = (userId) => {
 }
 
 export const pinDetailMorePinQuery = (pin) => {
-    const query = `*[ _tpe == "pin" && category == '${pin.category} && _id != '${pin._id}'] {
+    const query = `*[ _type == "pin" && category == '${pin.category}' && _id != '${pin._id}'] {
         image{
             asset->{
                 url

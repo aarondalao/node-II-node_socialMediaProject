@@ -26,17 +26,18 @@ const categories = [
   { name: "Portrait" },
   { name: "Technology" },
   { name: "Cars" },
+  { name: "Fitness" },
   { name: "Others" }
 ];
 
 const Sidebar = ({ user, closeToggle }) => {
 
   const handleCloseSidebar = () => {
-    if (closeToggle) closeToggle(false);
+    if (closeToggle) closeToggle(!closeToggle);
   }
 
   return (
-    <div className="flex flex-col justify-between bg-white h-full overflow-y-scroll min-w-210 hide-scrollbar">
+    <div className="flex flex-col justify-between bg-white h-full overflow-y-scroll min-w-210 max-w-400 hide-scrollbar ">
       <div className='flex flex-col'>
 
         <Link to="/" className='flex p-5 gap-2 my-6 pt-1 w-190 items-center' onClick={handleCloseSidebar}>
@@ -73,7 +74,7 @@ const Sidebar = ({ user, closeToggle }) => {
         className = "flex my-5 mb-3 gap-2 p-2 items-center bg-white rounded-lg shadow-lg mx-3"
         onClick = { handleCloseSidebar }
         >
-          <img src={ user.image } alt="user-profile" className='w-10 h-10 rounded-full' />
+          <img src={ user.image } alt="user-profile" className='w-10 h-10 z-0 rounded-full' />
           <p> { user.userName } </p>
           <IoIosArrowForward/>
         </Link>

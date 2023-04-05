@@ -1,12 +1,15 @@
 /*
-    notes:
     date created: 17/03/2023
-
+    notes:
+    
+    TODO:
+    1) login/logout buttons 
 
 */ 
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoMdAdd, IoMdSearch } from 'react-icons/io'
+import { AiOutlineLogin } from 'react-icons/ai'
 
 const Navbar = ({ searchTerm, setSearchTerm, user }) =>{
     const navigate = useNavigate();
@@ -29,6 +32,10 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) =>{
                         </Link>
                         <Link to="/create-pin" className='bg-black text-white rounded-lg w-12 h-12 md:w-14 md:h-12 flex justify-center items-center'>
                             <IoMdAdd/>
+                        </Link>
+                        {/* TODO: if logged in, must show log out. else, login */}
+                        <Link to="/login" className='bg-black text-white rounded-lg w-12 h-12 md:w-14 md:h-12 flex justify-center items-center'>
+                            <AiOutlineLogin/>
                         </Link>
                     </div>
                 </div>

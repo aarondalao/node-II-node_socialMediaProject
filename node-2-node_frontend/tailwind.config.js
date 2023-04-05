@@ -58,6 +58,10 @@ module.exports = {
         secondaryColor: '#F0F0F0',
         blackOverlay: 'rgba(0, 0 ,0 ,0.7)',
       },
+      /*
+        TODO: create slide-out keyframne and animation config for tailwindcss
+        basically a reverse of slide in
+      */ 
       keyframes: {
         'slide-in': {
           '0%': {
@@ -67,6 +71,18 @@ module.exports = {
           '100%': {
             '-webkit-transform': 'translateX(0px)',
             transform: 'translateX(0px)',
+          },
+        },
+        
+        // TODO: added this out
+        'slide-out': {
+          '0%': {
+            '-webkit-transform': 'translateX(0px)',
+            transform: 'translateX(0px)',
+          },
+          '100%': {
+            '-webkit-transform': 'translateX(-200px)',
+            transform: 'translateX(-200px)',
           },
         },
 
@@ -80,10 +96,15 @@ module.exports = {
             transform: 'translateZ(160px)',
           },
         },
+
+        
       },
       animation: {
         'slide-in': 'slide-in 0.5s ease-out',
         'slide-fwd': 'slide-fwd 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+
+        // TODO: added this
+        'slide-out' : 'slide-out 0.5s ease-out',
       },
       transitionProperty: {
         height: 'height',
