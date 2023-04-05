@@ -7,7 +7,7 @@
 */
 export const userQuery = (userId) => {
     // get the document that matches with type "user" and an _id of userId
-    const query = `*[_type == "user" && _id == "${userId}"]`;
+    const query = `*[_type == "user" && _id == '${userId}']`;
 
     return query;
 }
@@ -155,7 +155,7 @@ export const pinDetailQuery = (pinId) => {
 }
 // TODO: linked to UserProfiles.jsx
 export const userCreatedPinsQuery = (userId) => {
-    const query = `$[ _type == 'pin' && userId == '${userId}' ] | order(_createdAt desc){
+    const query = `*[ _type == 'pin' && userId == '${userId}'] | order(_createdAt desc) {
         image{
             asset->{
                 url
@@ -175,33 +175,32 @@ export const userCreatedPinsQuery = (userId) => {
                 image
             },
         },
-    }`
+    }`;
     return query;
 }
 
-// TODO: linked to UserProfiles.jsx
 export const userSavedPinsQuery = (userId) => {
-    const query = `[ _type == 'pins %% '${userId}' in save[].userId ] | order(_createdAt desc){
+    const query = `*[_type == 'pin' && '${userId}' in save[].userId ] | order(_createdAt desc) {
         image{
             asset->{
-                url
+              url
             }
-        },
-        _id,
-        destination,
-        postedBy->{
+          },
+          _id,
+          destination,
+          postedBy->{
             _id,
             userName,
             image
-        },
-        save[]{
+          },
+          save[]{
             postedBy->{
-                _id,
-                userName,
-                image
+              _id,
+              userName,
+              image
             },
-        },
-    }`
+          },
+    }`;
 
     return query;
 }
