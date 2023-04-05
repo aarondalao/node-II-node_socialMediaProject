@@ -21,11 +21,12 @@
     - [x] initial setup of sanity.io
     - [x] schema declarations
 - [ ] frontend
-    - [ ] home (container)
+    - [x] home (container)
     - [x] login (component)
     - [x] Sidebar (component)
     - [ ] UserProfile (component)
-    - [ ] Pins(container)
+    - [x] Pins(container)
+    - [x] Pin
     
 ## File Structure
 ```
