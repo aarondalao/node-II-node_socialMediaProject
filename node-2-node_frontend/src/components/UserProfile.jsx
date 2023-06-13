@@ -30,9 +30,15 @@ const UserProfile = () => {
   const { userId } = useParams();
 
   // const User = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
-  const User = fetchUserFromLocalStorage(); 
+  const User = fetchUserFromLocalStorage();
 
-  useEffect( () => {
+  const logout = () => {
+    googleLogout();
+    localStorage.clear();
+    navigate('/login');
+  }
+
+  useEffect(() => {
     const query = userQuery(userId);
     client.fetch(query).then((data) => {
       console.log("===============================================================");
@@ -41,11 +47,11 @@ const UserProfile = () => {
     });
   }, [userId]);
 
-  useEffect( () => {
-    if (text === 'Created'){
+  useEffect(() => {
+    if (text === 'Created') {
       const createdPinsQuery = userCreatedPinsQuery(userId);
 
-      client.fetch(createdPinsQuery).then((data)  => {
+      client.fetch(createdPinsQuery).then((data) => {
         setPins(data);
       });
     }
@@ -58,74 +64,71 @@ const UserProfile = () => {
     }
   }, [text, userId]);
 
-  const logout = () => {
-    localStorage.clear();
+  
 
-    navigate('/login');
-  }
-
-  if(!user) return <Spinner mesage="loading profile"/>
+  if (!user) return <Spinner mesage="loading profile" />
 
   return (
     <div className='relative pb-2 h-full justify-center items-center'>
       <div className='flex flex-col pb-5'>
         <div className='relative flex flex-col mb-7'>
           <div className='flex flex-col justify-center items-center'>
+          
             {/* TODO: replace this bottom part */}
             <img className="w-full h-370 2xl:h-510 shadow-lg object-cover" src="https://source.unsplash.com/1600x900/?nature,photography,technology" alt="user" />
 
-            <img className="rounded-full w-20 h-20 mt-10 shadow-xl object-cover" src={ user.image } alt="user" />
+            <img className="rounded-full w-20 h-20 mt-10 shadow-xl object-cover" src={user.image} alt="user" />
           </div>
           <h1 className="font-bold text-3xl text-center mt-3">
-            { user.userName }
+            {user.userName}
           </h1>
           <div className="absolute top-0 z-0 right-0 p-2">
-            {userId === User.sub && (
-              <googleLogout clientId={`${process.disconnect.REACT_APP_GOOGLE_API_TOKEN}`}
-              render ={(renderProps) => {
-                <button type='button' className='bg-white p-2 rounded-full cursor-pointer outline-none shadow-md'
-                onClick={ renderProps.onClick }
-                disabled={renderProps.disabled}>
-                  <AiOutlineLogout color="red" fontSize={21}/>
-                </button>
-              }}
-                onLogoutSuccess= {logout}
-                // TODO: check this out if this is applicable to react-auth/google 
-                cookiePolicy="single_host_origin"
-              />
-            )}
+            {
+              userId === User?.sub && (
+                <div>
+                  <button type="button" 
+                  className="bg-white p-2 rounded-lg cursor-pointer outline-none shadow-md"
+                  onClick={logout}
+                  >
+                    <AiOutlineLogout color="red" fontSize={21} /> 
+                  </button>
+                  
+                </div>
+
+            )
+            }
           </div>
         </div>
-        
+
         <div className="text-center mb-7">
           <button type="button" onClick={(e) => {
             setText(e.target.textContent);
             setactiveButton('created');
-            
+
           }}
-          className={`${activeButton === 'created' ? activeButtonStyling : inactiveButtonStyling}`}
+            className={`${activeButton === 'created' ? activeButtonStyling : inactiveButtonStyling}`}
           >
-          Created
+            Created
           </button>
           <button
             type='button'
-            onClick = {(e) => {
+            onClick={(e) => {
               setText(e.target.textContent);
               setactiveButton('saved');
             }}
-            className={`${activeButton === 'saved' ? activeButtonStyling : inactiveButtonStyling }`}
+            className={`${activeButton === 'saved' ? activeButtonStyling : inactiveButtonStyling}`}
           >
 
             Saved
           </button>
         </div>
 
-        <div className ="px-2">
+        <div className="px-2">
           <MasonryLayout pins={pins} />
         </div>
 
         {
-          pins?.length === 0 &&(
+          pins?.length === 0 && (
             <div className="flex justify-center font-bold items-center w-full text-xl mt-2">
               No Pins Found!
             </div>
